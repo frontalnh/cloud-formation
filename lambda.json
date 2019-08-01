@@ -1,0 +1,63 @@
+{
+    "Resources": {
+        "MyLambda": {
+            "Type": "AWS::Lambda::Function",
+            "DependsOn": [
+                "Prerequisite Resource name"
+            ],
+            "Properties": {
+                "Code": {
+                    "ZipFile": "exports.handler=(event,context,callback)=>{callback()}"
+                },
+                "Description": "This is my lambda function",
+                "Environment": {
+                    "Variables": {
+                        "password": "test1234"
+                    }
+                },
+                "FunctionName": "This is name",
+                "Handler": "index.handler",
+                "MemorySize": 128,
+                "ReservedConcurrentExecutions": 5,
+                "Role": {
+                    "Fn::GetAtt": [
+                        "MyExecutionRole",
+                        "Arn"
+                    ]
+                },
+                "Runtime": "nodejs8.10",
+                "Timeout": 5,
+                "VpcConfig": {
+                    "SecurityGroupIds": [
+                        "id"
+                    ],
+                    "SubnetIds": [
+                        "id"
+                    ]
+                }
+            }
+        },
+        "MyExecutionRole": {
+            "Type": "AWS::IAM:Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                            },
+                            "Action": "sts:AssumeRole"
+                        }
+                    ]
+                },
+                "ManagedPolicyArns": [
+                    "arn1"
+                ],
+                "Path": "/lambda",
+                "RoleName": "MyExecuteLambdaRole"
+            }
+        }
+    }
+}

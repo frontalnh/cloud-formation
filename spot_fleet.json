@@ -1,0 +1,30 @@
+{
+    "Resources": {
+        "MySpotFleet": {
+            "Type": "AWS::EC2::SpltFleet",
+            "Properties": {
+                "SpotFleetRequestConfigData": {
+                    "SpotPrice": 0.01,
+                    "IamFleetRole": "arn:aws:iam~~~",
+                    "TargetCapacity": 1,
+                    "LaunchSpecifications": [
+                        {
+                            "EbsOptimized": "false",
+                            "InstanceType": "t3.small",
+                            "ImageId": "id",
+                            "WeightedCapacity": "1",
+                            "SecurityGroups": [
+                                {
+                                    "GroupId": {
+                                        "Ref": "WebServerSecurityGroup"
+                                    }
+                                }
+                            ],
+                            "KeyName": "my-key"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
